@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import DesignViewer from "./pages/DesignViewer";
 import FieldEditor from "./pages/FieldEditor";
+import SpecificationCreator from "./pages/SpecificationCreator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/design-viewer" element={<DesignViewer />} />
           <Route path="/field-editor" element={<FieldEditor />} />
+          <Route path="/specification-creator" element={<SpecificationCreator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

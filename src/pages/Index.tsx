@@ -32,7 +32,8 @@ const Index = () => {
             </CardContent>
           </Card>
 
-          <Card className="opacity-60">
+          <Card className="hover:shadow-lg transition-shadow cursor-pointer"
+                onClick={() => navigate('/specification-creator')}>
             <CardHeader>
               <CardTitle>画面仕様書の作成</CardTitle>
               <CardDescription>
@@ -41,7 +42,7 @@ const Index = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-gray-600">
-                要件を自然言語で入力し、画面レイアウトの案を自動生成します。（準備中）
+                要件を自然言語で入力し、画面レイアウトの案を自動生成します。
               </p>
             </CardContent>
           </Card>
@@ -65,9 +66,16 @@ const Index = () => {
           <Button 
             onClick={() => navigate('/design-viewer')}
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-blue-600 hover:bg-blue-700 mr-4"
           >
             設計書閲覧を開始
+          </Button>
+          <Button 
+            onClick={() => navigate('/specification-creator')}
+            size="lg"
+            variant="outline"
+          >
+            仕様書作成を開始
           </Button>
         </div>
       </div>
