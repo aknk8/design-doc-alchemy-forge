@@ -1,9 +1,11 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { useNavigate } from 'react-router-dom';
+import { Edit, Plus } from 'lucide-react';
 
 interface FieldDefinition {
   id: string;
@@ -61,16 +63,31 @@ const sampleFields: FieldDefinition[] = [
 
 const DesignViewer = () => {
   const [selectedField, setSelectedField] = useState<FieldDefinition | null>(null);
+  const navigate = useNavigate();
 
   const handleFieldClick = (fieldId: string) => {
     const field = sampleFields.find(f => f.id === fieldId);
     setSelectedField(field || null);
   };
 
+  const handleEditField = () => {
+    if (selectedField) {
+      navigate(`/field-editor?fieldId=${selectedField.id}`);
+    }
+  };
+
+  const handleAddField = () => {
+    navigate('/field-editor?new=true');
+  };
+
   return (
     <div className="h-screen flex flex-col">
-      <div className="p-4 border-b">
+      <div className="p-4 border-b flex justify-between items-center">
         <h1 className="text-2xl font-bold">画面設計書 - ユーザー登録画面</h1>
+        <Button onClick={handleAddField} className="bg-green-600 hover:bg-green-700">
+          <Plus className="h-4 w-4 mr-2" />
+          新規項目追加
+        </Button>
       </div>
       
       <ResizablePanelGroup direction="horizontal" className="flex-1">
@@ -156,8 +173,14 @@ const DesignViewer = () => {
         <ResizablePanel defaultSize={50} minSize={30}>
           <div className="h-full p-4 overflow-auto">
             <Card>
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>項目定義</CardTitle>
+                {selectedField && (
+                  <Button onClick={handleEditField} size="sm" variant="outline">
+                    <Edit className="h-4 w-4 mr-2" />
+                    編集
+                  </Button>
+                )}
               </CardHeader>
               <CardContent>
                 {selectedField ? (
